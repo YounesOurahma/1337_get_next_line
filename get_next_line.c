@@ -6,7 +6,7 @@
 /*   By: yourahma <yourahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 17:42:02 by yourahma          #+#    #+#             */
-/*   Updated: 2025/11/25 11:47:02 by yourahma         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:19:07 by yourahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char	*get_next_line(int fd)
 	{
 		if (temp && ft_strchr(temp, '\n'))
 			return (ft_print_o_restore(&temp, &buff, read_bytes));
-		buff = malloc(BUFFER_SIZE + 1);
+		buff = malloc((size_t)BUFFER_SIZE + 1);
 		if (buff == NULL)
 			return (NULL);
 		read_bytes = read(fd, buff, BUFFER_SIZE);

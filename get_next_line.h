@@ -6,7 +6,7 @@
 /*   By: yourahma <yourahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 17:42:26 by yourahma          #+#    #+#             */
-/*   Updated: 2025/11/24 19:43:59 by yourahma         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:04:16 by yourahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 420000
 # endif
 
 # include <stdlib.h>
