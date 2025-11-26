@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yourahma <yourahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 17:42:02 by yourahma          #+#    #+#             */
-/*   Updated: 2025/11/26 20:02:19 by yourahma         ###   ########.fr       */
+/*   Created: 2025/11/26 18:40:15 by yourahma          #+#    #+#             */
+/*   Updated: 2025/11/26 19:52:32 by yourahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*ft_strchr(const char *s, int c)
 {
@@ -102,18 +102,18 @@ static char	*ft_print_o_restore(char **tp, char **bf, ssize_t read_bytes)
 
 char	*get_next_line(int fd)
 {
-	static char	*temp;
+	static char	*temp[FD_MAX];
 	char		*buff;
 	ssize_t		read_bytes;
 
 	buff = NULL;
 	read_bytes = 1;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || FD_MAX > 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
 	while (read_bytes != 0)
 	{
-		if (temp && ft_strchr(temp, '\n'))
-			return (ft_print_o_restore(&temp, &buff, read_bytes));
+		if (temp[fd] && ft_strchr(temp[fd], '\n'))
+			return (ft_print_o_restore(&temp[fd], &buff, read_bytes));
 		buff = malloc((size_t)BUFFER_SIZE + 1);
 		if (buff == NULL)
 			return (NULL);
@@ -121,9 +121,9 @@ char	*get_next_line(int fd)
 		if (read_bytes <= 0)
 			break ;
 		buff[read_bytes] = '\0';
-		temp = set_temp(temp, buff);
+		temp[fd] = set_temp(temp[fd], buff);
 		free(buff);
 		buff = NULL;
 	}
-	return (ft_print_o_restore(&temp, &buff, read_bytes));
+	return (ft_print_o_restore(&temp[fd], &buff, read_bytes));
 }
